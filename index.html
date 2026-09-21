@@ -92,6 +92,23 @@
     .button:hover{transform:translateY(-2px)}
     a:not(.button):hover{text-decoration-thickness:2px;text-underline-offset:3px}
   </style>
+  <style>
+    /* Direção inspirada na referência: composição cinematográfica escura, navegação enxuta e ouro como único ponto de ação. */
+    .top{position:absolute;inset:0 0 auto;z-index:10;background:linear-gradient(180deg,#0c0b10e8,transparent);padding:20px 0 44px}
+    .top .wrap{width:min(100% - 44px,1280px);align-items:center}.brand{font-size:1rem;letter-spacing:.02em;text-transform:none;color:#fff}.badge{display:none}
+    .top nav{display:flex;align-items:center;gap:28px}.top nav a{color:#e8e3da;text-decoration:none;font-size:.88rem;font-weight:600}.top nav a:last-child{border:1px solid #b67c2f;color:#f4c477;border-radius:999px;padding:9px 14px}
+    .hero{min-height:820px;display:flex;align-items:center;isolation:isolate;overflow:hidden;background:#0e0d12;padding:160px 0 100px}
+    .hero:before{content:"";position:absolute;inset:0;z-index:-2;background:linear-gradient(90deg,#0d0c11 4%,#0d0c11bd 40%,#0d0c1140 72%,#0d0c11 100%)}
+    .hero:after{content:"";position:absolute;inset:0;z-index:-1;background:radial-gradient(ellipse at 50% 54%,transparent 8%,#0d0c11a8 68%,#0d0c11 100%);pointer-events:none}
+    .hero-grid{display:block;text-align:center;width:min(100% - 40px,1100px);margin:auto;position:relative;z-index:1}.hero-grid>div:first-child{max-width:920px;margin:auto}
+    .hero .real-photo{position:absolute;inset:-160px -18vw -100px;z-index:-2;min-height:0!important;transform:none!important;border:0;box-shadow:none!important;padding:0;opacity:.55;filter:sepia(.18) saturate(.72) contrast(1.04)}
+    .hero .real-photo img{width:100%;height:100%;min-height:0!important;object-fit:cover;object-position:center 54%;filter:none}.hero .real-photo:before,.hero .real-photo figcaption{display:none}
+    .hero .kicker{display:inline-flex;align-items:center;gap:8px;color:#f6d8a0;background:#1d150fbd;border:1px solid #9b6630;border-radius:999px;padding:7px 13px;letter-spacing:.02em;text-transform:none;font-size:.78rem}.hero .kicker:before{content:"✦";color:var(--gold)}
+    .hero h1{max-width:900px;margin:24px auto 22px;font-size:clamp(4rem,8.3vw,7.6rem);line-height:.96;letter-spacing:-.045em;text-wrap:balance;color:#fff}.hero p{max-width:680px;margin:0 auto 32px;color:#f1ede6;font-size:1.05rem;line-height:1.52}
+    .actions{justify-content:center;gap:14px}.button{border-radius:13px;padding:15px 28px;box-shadow:0 8px 0 #9c6823;font-size:1rem}.button:hover{transform:translateY(-2px);box-shadow:0 10px 0 #9c6823}
+    .credentials{justify-content:center;gap:34px;margin-top:44px;padding-top:0;border:0}.credentials div{text-align:left}.credentials b{color:#f3cf83;font-size:.75rem}.credentials span{color:#fff;font-size:.82rem}
+    @media(max-width:760px){.top{padding-top:16px}.top .wrap{width:min(100% - 28px,1280px)}.top nav{gap:13px}.top nav a{font-size:.72rem}.top nav a:nth-child(2){display:none}.top nav a:last-child{padding:7px 10px}.hero{min-height:740px;padding:138px 0 74px}.hero h1{font-size:clamp(3.35rem,15.2vw,5.2rem)}.hero .real-photo{inset:-110px -50vw -80px}.hero p{font-size:.96rem}.credentials{gap:14px;align-items:flex-start;flex-direction:column;margin:34px auto 0;width:max-content;max-width:100%;text-align:left}.actions .button{width:100%}}
+  </style>
 </head>
 <body>
   <header class="top"><div class="wrap"><div class="brand">Corte & Cia <span class="badge">— Fortaleza</span></div><div>Primeira visita sem surpresa: preço, etapas e localização claros.</div></div></header>
@@ -170,6 +187,17 @@
       one('#dialog-note', 'Você revisa o pedido antes da confirmação.');
       document.querySelectorAll('[onclick*="agendar"]').forEach(button => button.textContent = 'Abrir pedido de horário');
       window.showConfirmation = (event) => { event.preventDefault(); document.getElementById('dialog-note').textContent = 'Você enviou um pedido de horário. A confirmação segue pelo canal informado.'; };
+    })();
+  </script>
+  <script>
+    (() => {
+      const headerContent = document.querySelector('.top .wrap > div:last-child');
+      if (headerContent) {
+        const nav = document.createElement('nav');
+        nav.setAttribute('aria-label', 'Navegação principal');
+        nav.innerHTML = '<a href="#precos">Preços</a><a href="#agendar">Primeira visita</a><a href="#agendar">Abrir pedido</a>';
+        headerContent.replaceWith(nav);
+      }
     })();
   </script>
 </body></html>
